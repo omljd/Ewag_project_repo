@@ -44,11 +44,11 @@ export const Contact = () => {
             </p>
 
             <div className="mt-10 space-y-4">
-              <a href="https://wa.me/911234567890" target="_blank" rel="noreferrer" className="group flex items-center gap-4 rounded-2xl border border-paper/10 bg-paper/5 p-5 transition-colors hover:border-brand">
+              <a href="https://wa.me/918766910241?text=hello%20sanket" target="_blank" rel="noreferrer" className="group flex items-center gap-4 rounded-2xl border border-paper/10 bg-paper/5 p-5 transition-colors hover:border-brand">
                 <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand text-brand-foreground"><MessageCircle className="h-5 w-5" /></span>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-paper/50">WhatsApp</div>
-                  <div className="font-medium">+91 12345 67890</div>
+                  <div className="font-medium">+91 87669 10241</div>
                 </div>
               </a>
               <a href="mailto:hello@ewag.in" className="flex items-center gap-4 rounded-2xl border border-paper/10 bg-paper/5 p-5">

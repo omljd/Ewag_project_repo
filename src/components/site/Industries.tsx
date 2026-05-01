@@ -14,9 +14,9 @@ export const Industries = () => {
     <section id="industries" className="bg-paper-muted py-24 md:py-32">
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
-          <div className="max-w-xl">
+          <div className="max-w-xl md:max-w-full">
             <span className="chip mb-5">Industries we serve</span>
-            <h2 className="font-display text-4xl font-bold leading-[1.05] text-balance md:text-6xl">
+            <h2 className="font-display text-4xl font-bold leading-[1.05] text-balance md:text-5xl lg:text-6xl">
               Built for businesses that need <span className="text-brand">real results</span>.
             </h2>
           </div>

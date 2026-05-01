@@ -4,10 +4,12 @@ import { Link, useLocation } from "react-router-dom";
 
 const links = [
   { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
   { label: "Services", to: "/services" },
   { label: "Industries", to: "/industries" },
   { label: "Process", to: "/process" },
   { label: "Work", to: "/work" },
+  { label: "Portfolio", to: "/portfolio" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -69,7 +71,7 @@ export const Header = () => {
 
           <div className="hidden items-center gap-2 md:flex">
             <a
-              href="https://wa.me/911234567890"
+              href="https://wa.me/8766910241"
               target="_blank"
               rel="noreferrer"
               className={`grid h-10 w-10 place-items-center rounded-full border transition-colors ${

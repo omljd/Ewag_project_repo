@@ -14,7 +14,7 @@ export const Footer = () => {
               Websites · AI Content · Automation. We build systems that bring
               customers automatically.
             </p>
-            <a href="https://wa.me/911234567890" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:underline">
+            <a href="https://wa.me/8766910241" target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:underline">
               <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
             </a>
           </div>

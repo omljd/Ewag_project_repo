@@ -1,23 +1,23 @@
 import { ArrowUpRight, Globe, Layout, Sparkles, MessageCircle, Magnet, Database, Megaphone, Wrench } from "lucide-react";
 
 const services = [
-  { icon: Globe, title: "Website Development", desc: "Fast, responsive business websites with modern UI." },
-  { icon: Layout, title: "Landing Pages & Funnels", desc: "Campaign pages and offer funnels engineered to convert." },
-  { icon: Sparkles, title: "AI Content Creation", desc: "AI-powered copy, creatives and content strategy." },
-  { icon: Megaphone, title: "Social Media Creative", desc: "Ad creatives, Instagram visuals and campaign assets." },
-  { icon: MessageCircle, title: "WhatsApp Automation", desc: "Auto-replies, qualification flows and follow-ups." },
-  { icon: Magnet, title: "Lead Generation Systems", desc: "Forms, capture journeys and conversion architecture." },
-  { icon: Database, title: "CRM & Lead Tracking", desc: "Inquiry tracking, pipelines and follow-up structure." },
-  { icon: Wrench, title: "Maintenance & Support", desc: "Ongoing updates, performance care and growth support." },
+  { icon: Globe, title: "Website Development", desc: "Business websites, corporate pages, service-based websites, responsive design,and modern UI." },
+  { icon: Layout, title: "Landing Pages & Funnels", desc: "Campaign pages, offer pages, and lead-generation funnels designed to convert." },
+  { icon: Sparkles, title: "AI Content Creation", desc: "AI-assisted content support, marketing content ideas, short-form contentstrategy, and branded assets." },
+  { icon: Megaphone, title: "Social Media Creative", desc: "Instagram creatives, ad creatives, campaign graphics, and promotional visuals." },
+  { icon: MessageCircle, title: "WhatsApp Automation", desc: "Instant inquiry handling, auto replies, qualification flow, and follow-up support." },
+  { icon: Magnet, title: "Lead Generation Systems", desc: "Contact forms, inquiry systems, funnel-based capture, and conversion journey setup." },
+  { icon: Database, title: "CRM & Lead Tracking", desc: "Lead collection sheet or system, inquiry tracking, pipeline visibility, and follow-upstructure." },
+  { icon: Wrench, title: "Maintenance & Support", desc: "Website updates, content edits, performance checks, and ongoing support." },
 ];
 
 export const ServicesGrid = () => {
   return (
     <section className="bg-paper py-24 md:py-32">
       <div className="container-x">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto text-center px-4 md:px-6 lg:px-8">
           <span className="chip mb-5">Services</span>
-          <h2 className="font-display text-4xl font-bold leading-[1.05] text-balance md:text-6xl">
+          <h2 className="font-display text-3xl font-bold leading-[1.1] text-balance md:text-5xl lg:text-6xl">
             Everything your business needs to <span className="text-brand">grow online</span>.
           </h2>
         </div>

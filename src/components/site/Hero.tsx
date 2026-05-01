@@ -31,16 +31,15 @@ export const Hero = () => {
           </h1>
 
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-paper/70 md:text-xl animate-fade-up" style={{ animationDelay: "140ms" }}>
-            We build websites, AI content and automation systems that bring
-            customers to your business — automatically.
+            We build websites, AI content, and automation systems that help businesses attract customers and grow faster.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 animate-fade-up" style={{ animationDelay: "220ms" }}>
-            <a href="#contact" className="btn-brand">
+            <a href="/contact" className="btn-brand">
               Book Free Consultation <ArrowRight className="h-4 w-4" />
             </a>
             <a
-              href="https://wa.me/911234567890"
+              href="https://wa.me/918766910241?text=hello%20sanket"
               target="_blank"
               rel="noreferrer"
               className="btn-ghost-paper"
