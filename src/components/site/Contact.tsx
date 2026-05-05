@@ -26,51 +26,51 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-ink py-24 text-paper md:py-32">
-      <div className="absolute inset-0 grid-lines opacity-50" />
-      <div className="pointer-events-none absolute -top-40 right-1/4 h-[400px] w-[400px] rounded-full bg-brand/30 blur-[120px]" />
+    <section id="contact" className="relative overflow-hidden bg-paper-muted py-24 text-ink md:py-32">
+      <div className="absolute inset-0 grid-lines opacity-20" />
+      <div className="pointer-events-none absolute -top-40 right-1/4 h-[400px] w-[400px] rounded-full bg-brand/10 blur-[120px]" />
 
       <div className="container-x relative">
         <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           {/* Left */}
           <div>
-            <span className="chip-dark mb-5">Let's talk</span>
+            <span className="chip mb-5">Let's talk</span>
             <h2 className="font-display text-4xl font-bold leading-[1.02] text-balance md:text-6xl">
               Let's build your <span className="text-brand">growth system</span>.
             </h2>
-            <p className="mt-6 max-w-md text-paper/70">
+            <p className="mt-6 max-w-md text-ink/60">
               Tell us about your business. We'll send back a clear plan, a quote,
               and a 30-min consultation slot — usually within the same day.
             </p>
 
             <div className="mt-10 space-y-4">
-              <a href="https://wa.me/918766910241?text=hello%20sanket" target="_blank" rel="noreferrer" className="group flex items-center gap-4 rounded-2xl border border-paper/10 bg-paper/5 p-5 transition-colors hover:border-brand">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand text-brand-foreground"><MessageCircle className="h-5 w-5" /></span>
+              <a href="https://wa.me/918766910241?text=hello%20sanket" target="_blank" rel="noreferrer" className="group flex items-center gap-4 rounded-2xl border border-ink/10 bg-paper p-5 transition-colors hover:border-brand">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand text-paper"><MessageCircle className="h-5 w-5" /></span>
                 <div>
-                  <div className="text-xs uppercase tracking-widest text-paper/50">WhatsApp</div>
+                  <div className="text-xs uppercase tracking-widest text-ink/50">WhatsApp</div>
                   <div className="font-medium">+91 87669 10241</div>
                 </div>
               </a>
-              <a href="mailto:hello@ewag.in" className="flex items-center gap-4 rounded-2xl border border-paper/10 bg-paper/5 p-5">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-paper/10"><Mail className="h-5 w-5" /></span>
+              <a href="mailto:hello@ewag.in" className="flex items-center gap-4 rounded-2xl border border-ink/10 bg-paper p-5 transition-colors hover:border-brand">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-ink/5"><Mail className="h-5 w-5" /></span>
                 <div>
-                  <div className="text-xs uppercase tracking-widest text-paper/50">Email</div>
+                  <div className="text-xs uppercase tracking-widest text-ink/50">Email</div>
                   <div className="font-medium">hello@ewag.in</div>
                 </div>
               </a>
               <div className="grid grid-cols-2 gap-4">
-                <div className="flex items-center gap-3 rounded-2xl border border-paper/10 bg-paper/5 p-5">
+                <div className="flex items-center gap-3 rounded-2xl border border-ink/10 bg-paper p-5 transition-colors hover:border-brand">
                   <Phone className="h-4 w-4 text-brand" />
                   <span className="text-sm">+91 98765 43210</span>
                 </div>
-                <div className="flex items-center gap-3 rounded-2xl border border-paper/10 bg-paper/5 p-5">
+                <div className="flex items-center gap-3 rounded-2xl border border-ink/10 bg-paper p-5 transition-colors hover:border-brand">
                   <MapPin className="h-4 w-4 text-brand" />
                   <span className="text-sm">India · Remote</span>
                 </div>
               </div>
               <div className="flex gap-3 pt-2">
                 {[Instagram, Linkedin].map((Icon, i) => (
-                  <a key={i} href="#" className="grid h-10 w-10 place-items-center rounded-full border border-paper/15 transition-colors hover:bg-brand hover:text-brand-foreground">
+                  <a key={i} href="#" className="grid h-10 w-10 place-items-center rounded-full border border-ink/15 transition-colors hover:bg-brand hover:text-paper">
                     <Icon className="h-4 w-4" />
                   </a>
                 ))}

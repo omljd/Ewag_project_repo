@@ -34,7 +34,7 @@ export const Industries = () => {
             >
               <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-brand/5 transition-transform duration-500 group-hover:scale-150" />
               <div className="relative">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-ink text-paper transition-colors group-hover:bg-brand">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand text-paper transition-colors">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-6 font-display text-xl font-semibold">{name}</h3>

@@ -7,7 +7,7 @@ export const Footer = () => {
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">
             <div className="flex items-center gap-2">
-              <span className="grid h-9 w-9 place-items-center rounded-xl bg-ink text-paper font-display font-bold">E</span>
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand text-paper font-display font-bold">E</span>
               <span className="font-display text-lg font-bold tracking-tight">EWAG<span className="text-brand">.</span></span>
             </div>
             <p className="mt-5 max-w-sm text-sm text-ink/60">

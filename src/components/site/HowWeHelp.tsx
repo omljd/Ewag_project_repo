@@ -11,10 +11,10 @@ const outcomes = [
 
 export const HowWeHelp = () => {
   return (
-    <section className="bg-ink py-24 text-paper md:py-32">
+    <section className="bg-paper py-24 text-ink md:py-32 border-t border-ink/5">
       <div className="container-x grid gap-14 lg:grid-cols-2 lg:gap-24">
         <div>
-          <span className="chip-dark mb-5">How we help</span>
+          <span className="chip mb-5">How we help</span>
           <h2 className="font-display text-4xl font-bold leading-[1.05] text-balance md:text-5xl lg:text-6xl">
             We build <span className="text-brand">systems</span>, not just designs.
           </h2>
@@ -25,15 +25,15 @@ export const HowWeHelp = () => {
             follow-up that closes the deal.
           </p>
 
-          <div className="mt-10 rounded-3xl border border-paper/10 bg-paper/5 p-6">
+          <div className="mt-10 rounded-3xl border border-ink/10 bg-ink/5 p-6">
             <p className="text-xs font-semibold uppercase tracking-widest text-brand">
               Outcome over output
             </p>
-            <p className="mt-3 font-display text-2xl leading-snug text-paper">
+            <p className="mt-3 font-display text-2xl leading-snug text-ink">
               "EWAG turned our site into a real lead machine. We get qualified
               inquiries on WhatsApp every single day."
             </p>
-            <p className="mt-4 text-sm text-paper/50">— Founder, Growth-stage clinic</p>
+            <p className="mt-4 text-sm text-ink/50">— Founder, Growth-stage clinic</p>
           </div>
         </div>
 
@@ -41,12 +41,12 @@ export const HowWeHelp = () => {
           {outcomes.map((o) => (
             <li
               key={o}
-              className="flex items-start gap-3 rounded-2xl border border-paper/10 bg-paper/5 p-5 transition-colors hover:border-brand/40"
+              className="flex items-start gap-3 rounded-2xl border border-ink/10 bg-ink/5 p-5 transition-colors hover:border-brand/40"
             >
-              <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand text-brand-foreground">
+              <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand text-paper">
                 <Check className="h-3.5 w-3.5" strokeWidth={3} />
               </span>
-              <span className="text-sm font-medium text-paper/90">{o}</span>
+              <span className="text-sm font-medium text-ink/90">{o}</span>
             </li>
           ))}
         </ul>

@@ -32,7 +32,7 @@ export const WhyChoose = () => {
                   i === 0 ? "sm:col-span-2" : ""
                 }`}
               >
-                <div className="grid h-11 w-11 place-items-center rounded-xl bg-ink text-paper">
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-brand text-paper">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-5 font-display text-lg font-semibold">{t}</h3>

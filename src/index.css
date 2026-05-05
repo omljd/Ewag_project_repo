@@ -3,61 +3,61 @@
 @tailwind utilities;
 
 /* EWAG Digital Services — Design System
-   Theme: Black, White, White
+   Theme: Black, White, Indigo
    All colors HSL.
 */
 
 @layer base {
     :root {
         --background: 0 0% 100%;
-        --foreground: 0 0% 0%;
+        --foreground: 0 0% 4%;
 
         --card: 0 0% 100%;
-        --card-foreground: 0 0% 0%;
+        --card-foreground: 0 0% 4%;
 
         --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 0%;
+        --popover-foreground: 0 0% 4%;
 
         /* Brand */
-        --brand: 0 0% 100%;
-        /* #ffffff white */
-        --brand-foreground: 0 0% 0%;
-        --brand-glow: 0 0% 95%;
+        --brand: 238 85% 60%;
+        /* #6366f1 indigo */
+        --brand-foreground: 0 0% 100%;
+        --brand-glow: 238 85% 70%;
         --ink: 0 0% 0%;
         /* pure black */
-        --ink-soft: 0 0% 0%;
+        --ink-soft: 0 0% 8%;
         /* #141414 */
         --paper: 0 0% 100%;
-        --paper-muted: 0 0% 100%;
+        --paper-muted: 0 0% 96%;
 
-        --primary: 0 0% 100%;
-        --primary-foreground: 0 0% 0%;
+        --primary: 238 85% 60%;
+        --primary-foreground: 0 0% 100%;
 
-        --secondary: 0 0% 100%;
-        --secondary-foreground: 0 0% 0%;
+        --secondary: 0 0% 96%;
+        --secondary-foreground: 0 0% 4%;
 
-        --muted: 0 0% 100%;
-        --muted-foreground: 0 0% 0%;
+        --muted: 0 0% 96%;
+        --muted-foreground: 0 0% 40%;
 
-        --accent: 0 0% 100%;
-        --accent-foreground: 0 0% 0%;
+        --accent: 238 85% 60%;
+        --accent-foreground: 0 0% 100%;
 
         --destructive: 0 84% 60%;
         --destructive-foreground: 0 0% 100%;
 
-        --border: 0 0% 0%;
-        --input: 0 0% 0%;
-        --ring: 0 0% 100%;
+        --border: 0 0% 90%;
+        --input: 0 0% 90%;
+        --ring: 238 85% 60%;
 
         --radius: 0.875rem;
 
         /* Gradients */
-        --gradient-brand: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 95%));
+        --gradient-brand: linear-gradient(135deg, hsl(238 85% 65%), hsl(238 85% 55%));
         --gradient-ink: linear-gradient(180deg, hsl(0 0% 0%), hsl(0 0% 8%));
-        --gradient-radial-brand: radial-gradient(ellipse at top, hsl(0 0% 100% / 0.25), transparent 60%);
+        --gradient-radial-brand: radial-gradient(ellipse at top, hsl(238 85% 60% / 0.25), transparent 60%);
 
         /* Shadows */
-        --shadow-brand: 0 20px 60px -20px hsl(0 0% 0% / 0.15);
+        --shadow-brand: 0 20px 60px -20px hsl(238 85% 60% / 0.55);
         --shadow-ink: 0 30px 80px -30px hsl(0 0% 0% / 0.5);
         --shadow-card: 0 1px 0 hsl(0 0% 0% / 0.04), 0 10px 40px -20px hsl(0 0% 0% / 0.12);
 
@@ -72,17 +72,17 @@
         --card-foreground: 0 0% 98%;
         --popover: 0 0% 6%;
         --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 95%;
+        --primary: 238 85% 65%;
         --primary-foreground: 0 0% 0%;
         --secondary: 0 0% 10%;
         --secondary-foreground: 0 0% 98%;
         --muted: 0 0% 10%;
         --muted-foreground: 0 0% 60%;
-        --accent: 0 0% 95%;
+        --accent: 238 85% 65%;
         --accent-foreground: 0 0% 0%;
         --border: 0 0% 14%;
         --input: 0 0% 14%;
-        --ring: 0 0% 95%;
+        --ring: 238 85% 65%;
     }
 }
 
@@ -97,7 +97,6 @@
 
     body {
         @apply bg-background text-foreground antialiased;
-        background-color: #ffffff !important;
         font-family: 'DM Sans', system-ui, sans-serif;
         font-feature-settings: "ss01", "cv11";
     }
@@ -265,11 +264,11 @@
 
     0%,
     100% {
-        box-shadow: 0 0 0 0 hsl(0 0% 0% / 0.3);
+        box-shadow: 0 0 0 0 hsl(238 85% 60% / 0.6);
     }
 
     50% {
-        box-shadow: 0 0 0 16px hsl(0 0% 0% / 0);
+        box-shadow: 0 0 0 16px hsl(238 85% 60% / 0);
     }
 }
 

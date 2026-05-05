@@ -21,7 +21,7 @@ export const Marquee = () => {
           {[...logos, ...logos].map((l, i) => (
             <span
               key={i}
-              className="font-display text-2xl font-bold tracking-tight text-ink/30 md:text-3xl"
+              className="font-display text-2xl font-bold tracking-tight text-ink/20 transition-all hover:text-brand hover:scale-105 md:text-3xl cursor-default select-none"
             >
               {l}
             </span>
