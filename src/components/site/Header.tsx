@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
+import { motion } from "framer-motion";
+
 const links = [
   { label: "Home", to: "/" },
   { label: "About", to: "/about" },
@@ -28,7 +30,7 @@ export const Header = () => {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        scrolled ? "py-3" : "py-5"
+        scrolled ? "py-2" : "py-4"
       }`}
     >
       <div className="container-x">
@@ -40,9 +42,7 @@ export const Header = () => {
           }`}
         >
           <Link to="/" className="flex items-center gap-2 pl-2">
-            <span className={`grid h-9 w-9 place-items-center rounded-xl font-display font-bold transition-colors ${
-              scrolled ? "bg-foreground text-background" : "bg-brand text-brand-foreground"
-            }`}>
+            <span className="grid h-9 w-9 place-items-center rounded-xl font-display font-bold transition-colors bg-brand text-brand-foreground">
               E
             </span>
             <span className="font-display text-lg font-bold tracking-tight">
@@ -57,12 +57,16 @@ export const Header = () => {
                 <Link
                   key={l.to}
                   to={l.to}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                    scrolled
-                      ? `${active ? "bg-foreground text-background" : "text-foreground/70 hover:bg-background hover:text-foreground"}`
-                      : `${active ? "bg-background text-foreground" : "text-foreground/80 hover:bg-background hover:text-foreground"}`
+                  className={`relative px-4 py-2 text-sm font-medium transition-colors ${
+                    active ? "text-ink" : "text-foreground/70 hover:text-foreground"
                   }`}
                 >
+                  {active && (
+                    <motion.span
+                      layoutId="active-nav"
+                      className="absolute inset-0 -z-10 rounded-full bg-white shadow-sm"
+                    />
+                  )}
                   {l.label}
                 </Link>
               );
@@ -83,7 +87,7 @@ export const Header = () => {
             >
               <MessageCircle className="h-4 w-4" />
             </a>
-            <Link to="/contact" className="btn-brand py-2.5 text-sm">
+            <Link to="/book-consultation" className="btn-brand py-2.5 text-sm">
               Book Consultation
             </Link>
           </div>
@@ -112,7 +116,7 @@ export const Header = () => {
                   {l.label}
                 </Link>
               ))}
-              <Link to="/contact" onClick={() => setOpen(false)} className="btn-brand mt-2">
+              <Link to="/book-consultation" onClick={() => setOpen(false)} className="btn-brand mt-2">
                 Book Consultation
               </Link>
             </div>

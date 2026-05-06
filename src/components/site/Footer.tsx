@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="bg-paper py-16 text-ink">
+    <footer className="bg-paper py-12 text-ink">
       <div className="container-x">
         <div className="grid gap-12 md:grid-cols-12">
           <div className="md:col-span-5">

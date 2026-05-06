@@ -29,7 +29,7 @@ const cards = [
 
 export const WhatWeDo = () => {
   return (
-    <section id="services" className="bg-paper py-24 md:py-32">
+    <section id="services" className="bg-paper py-10 md:py-14">
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-xl">
@@ -44,18 +44,18 @@ export const WhatWeDo = () => {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {cards.map(({ icon: Icon, title, body, tag }) => (
             <a
               key={title}
               href="#contact"
-              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-ink/10 bg-paper p-7 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-brand hover:shadow-brand"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-ink/10 bg-paper p-6 shadow-card transition-all duration-500 hover:-translate-y-1 hover:border-brand hover:shadow-brand"
             >
               <div className="absolute right-5 top-5 text-xs font-semibold tracking-widest text-ink/30 group-hover:text-brand/50">
                 {tag}
               </div>
               <div>
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-paper-muted text-ink transition-colors group-hover:bg-brand group-hover:text-paper">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-paper border border-ink/10 text-ink transition-colors group-hover:bg-brand group-hover:text-paper group-hover:border-brand">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-8 font-display text-2xl font-semibold">{title}</h3>

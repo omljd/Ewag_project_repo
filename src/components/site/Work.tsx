@@ -15,7 +15,7 @@ const testimonials = [
 
 export const Work = () => {
   return (
-    <section id="work" className="bg-paper-muted py-24 md:py-32">
+    <section id="work" className="bg-paper-muted py-14 md:py-20">
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -29,7 +29,7 @@ export const Work = () => {
           </a>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2">
+        <div className="mt-10 grid gap-5 md:grid-cols-2">
           {work.map((w) => (
             <div
               key={w.title}

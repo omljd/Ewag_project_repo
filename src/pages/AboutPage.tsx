@@ -1,6 +1,7 @@
 import { PageShell } from "@/components/site/PageShell";
 import { PageHero } from "@/components/site/PageHero";
 import { Building2, Users, Target, Award, Clock, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AboutPage = () => (
   <PageShell
@@ -19,7 +20,7 @@ const AboutPage = () => (
     />
 
     {/* Mission Section */}
-    <section className="py-20 bg-paper">
+    <section className="py-14 bg-paper">
       <div className="container-x">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-ink md:text-4xl">
@@ -33,20 +34,20 @@ const AboutPage = () => (
     </section>
 
     {/* Stats Section */}
-    <section className="py-20 bg-ink text-paper">
+    <section className="py-14 bg-paper-muted text-ink">
       <div className="container-x">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-paper/10 bg-paper/5 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/5 md:grid-cols-4">
           {[
             { k: "120+", v: "Systems delivered" },
             { k: "5×", v: "Average growth" },
             { k: "24/7", v: "Automation running" },
             { k: "98%", v: "Client satisfaction" },
           ].map((stat) => (
-            <div key={stat.v} className="bg-ink p-8 text-center">
-              <div className="font-display text-3xl font-bold text-paper md:text-4xl">
+            <div key={stat.v} className="bg-paper p-8 text-center">
+              <div className="font-display text-3xl font-bold text-ink md:text-4xl">
                 {stat.k}
               </div>
-              <div className="mt-2 text-sm uppercase tracking-widest text-paper/50">
+              <div className="mt-2 text-sm uppercase tracking-widest text-ink/50">
                 {stat.v}
               </div>
             </div>
@@ -56,7 +57,7 @@ const AboutPage = () => (
     </section>
 
     {/* Values Section */}
-    <section className="py-20 bg-paper">
+    <section className="py-14 bg-paper">
       <div className="container-x">
         <div className="mx-auto max-w-4xl">
           <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-ink md:text-4xl text-center mb-12">
@@ -101,7 +102,7 @@ const AboutPage = () => (
     </section>
 
     {/* Team Section */}
-    <section className="py-20 bg-paper text-ink">
+    <section className="py-14 bg-paper text-ink">
       <div className="container-x">
         <div className="mx-auto max-w-4xl text-center mb-12">
           <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-ink md:text-4xl">
@@ -143,30 +144,30 @@ const AboutPage = () => (
     </section>
 
     {/* CTA Section */}
-    <section className="relative overflow-hidden bg-ink text-paper">
+    <section className="relative overflow-hidden bg-paper text-ink border-t border-ink/5">
       <div className="absolute inset-0 grid-lines opacity-60" />
       <div className="absolute inset-0 bg-gradient-radial-brand" />
       <div className="container-x relative py-20">
         <div className="mx-auto max-w-4xl text-center">
-          <span className="chip-dark mb-6 inline-flex animate-fade-up">
+          <span className="chip mb-6 inline-flex animate-fade-up">
             <Target className="h-3.5 w-3.5 text-brand" />
             Let's work together
           </span>
-          <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-paper md:text-4xl animate-fade-up" style={{ animationDelay: "60ms" }}>
+          <h2 className="font-display text-3xl font-bold leading-tight tracking-tight text-ink md:text-4xl animate-fade-up" style={{ animationDelay: "60ms" }}>
             Ready to automate your growth?
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-paper/70 md:text-xl animate-fade-up" style={{ animationDelay: "140ms" }}>
+          <p className="mt-6 text-lg leading-relaxed text-ink/70 md:text-xl animate-fade-up" style={{ animationDelay: "140ms" }}>
             Let's discuss how we can build a custom growth system for your business.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4 animate-fade-up" style={{ animationDelay: "220ms" }}>
-            <a href="/contact" className="btn-brand">
+            <Link to="/book-consultation" className="btn-brand">
               Book Free Consultation
-            </a>
+            </Link>
             <a
               href="https://wa.me/911234567890"
               target="_blank"
               rel="noreferrer"
-              className="btn-ghost-paper"
+              className="btn-ghost-ink"
             >
               Chat on WhatsApp
             </a>

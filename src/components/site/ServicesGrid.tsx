@@ -13,7 +13,7 @@ const services = [
 
 export const ServicesGrid = () => {
   return (
-    <section className="bg-paper py-24 md:py-32">
+    <section className="bg-paper py-14 md:py-20">
       <div className="container-x">
         <div className="mx-auto text-center px-4 md:px-6 lg:px-8">
           <span className="chip mb-5">Services</span>
@@ -22,14 +22,14 @@ export const ServicesGrid = () => {
           </h2>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-ink/10 bg-ink/10 sm:grid-cols-2 lg:grid-cols-4">
           {services.map(({ icon: Icon, title, desc }) => (
             <a
               key={title}
               href="#contact"
               className="group relative flex flex-col bg-paper p-7 transition-colors hover:bg-paper-muted"
             >
-              <div className="grid h-11 w-11 place-items-center rounded-xl bg-ink text-paper transition-colors group-hover:bg-brand">
+              <div className="grid h-11 w-11 place-items-center rounded-xl bg-paper border border-ink/10 text-ink transition-colors group-hover:bg-brand group-hover:text-paper group-hover:border-brand">
                 <Icon className="h-5 w-5" />
               </div>
               <h3 className="mt-6 font-display text-lg font-semibold">{title}</h3>

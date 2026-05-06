@@ -18,7 +18,9 @@ const ContactPage = () => (
       description="Tell us about your business — we'll send back a clear plan, a quote and a 30-min consultation slot, usually within the same day."
       crumbs={[{ label: "Home", to: "/" }, { label: "Contact" }]}
     /> */}
-    <Contact />
+    <div className="pt-28">
+      <Contact />
+    </div>
     <StickyWhatsApp />
   </PageShell>
 );

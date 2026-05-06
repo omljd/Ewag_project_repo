@@ -26,12 +26,12 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-paper-muted py-24 text-ink md:py-32">
+    <section id="contact" className="relative overflow-hidden bg-paper-muted py-10 text-ink md:py-14">
       <div className="absolute inset-0 grid-lines opacity-20" />
       <div className="pointer-events-none absolute -top-40 right-1/4 h-[400px] w-[400px] rounded-full bg-brand/10 blur-[120px]" />
 
       <div className="container-x relative">
-        <div className="grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-12">
           {/* Left */}
           <div>
             <span className="chip mb-5">Let's talk</span>
@@ -43,16 +43,16 @@ export const Contact = () => {
               and a 30-min consultation slot — usually within the same day.
             </p>
 
-            <div className="mt-10 space-y-4">
+            <div className="mt-8 space-y-4">
               <a href="https://wa.me/918766910241?text=hello%20sanket" target="_blank" rel="noreferrer" className="group flex items-center gap-4 rounded-2xl border border-ink/10 bg-paper p-5 transition-colors hover:border-brand">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand text-paper"><MessageCircle className="h-5 w-5" /></span>
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-paper border border-ink/10 text-ink group-hover:bg-brand group-hover:text-paper group-hover:border-brand transition-colors"><MessageCircle className="h-5 w-5" /></span>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-ink/50">WhatsApp</div>
                   <div className="font-medium">+91 87669 10241</div>
                 </div>
               </a>
               <a href="mailto:hello@ewag.in" className="flex items-center gap-4 rounded-2xl border border-ink/10 bg-paper p-5 transition-colors hover:border-brand">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-ink/5"><Mail className="h-5 w-5" /></span>
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-paper border border-ink/10 text-ink group-hover:bg-brand group-hover:text-paper group-hover:border-brand transition-colors"><Mail className="h-5 w-5" /></span>
                 <div>
                   <div className="text-xs uppercase tracking-widest text-ink/50">Email</div>
                   <div className="font-medium">hello@ewag.in</div>
@@ -79,15 +79,15 @@ export const Contact = () => {
           </div>
 
           {/* Form */}
-          <form onSubmit={onSubmit} className="rounded-3xl border border-paper/10 bg-paper p-7 text-ink shadow-ink md:p-10">
-            <div className="grid gap-4 sm:grid-cols-2">
+          <form onSubmit={onSubmit} className="rounded-3xl border border-paper/10 bg-paper p-5 text-ink shadow-ink md:p-8">
+            <div className="grid gap-3 sm:grid-cols-2">
               <Field label="Your Name" name="name" placeholder="Jane Doe" required />
               <Field label="Business Name" name="business" placeholder="Acme Co." required />
               <Field label="Phone" name="phone" placeholder="+91 ..." required />
               <Field label="Email" name="email" type="email" placeholder="you@company.com" required />
               <div className="sm:col-span-2">
                 <Label>Service interested in</Label>
-                <select name="service" className="mt-2 w-full rounded-xl border border-ink/10 bg-paper-muted px-4 py-3 text-sm outline-none transition focus:border-brand focus:bg-paper">
+                <select name="service" className="mt-1.5 w-full rounded-xl border border-ink/10 bg-paper-muted px-3.5 py-2.5 text-sm outline-none transition focus:border-brand focus:bg-paper">
                   {services.map((s) => <option key={s}>{s}</option>)}
                 </select>
               </div>
@@ -96,17 +96,17 @@ export const Contact = () => {
                 <Label>Tell us what you need</Label>
                 <textarea
                   name="message"
-                  rows={4}
+                  rows={3}
                   required
                   placeholder="Goals, current challenges, timeline..."
-                  className="mt-2 w-full resize-none rounded-xl border border-ink/10 bg-paper-muted px-4 py-3 text-sm outline-none transition focus:border-brand focus:bg-paper"
+                  className="mt-1.5 w-full resize-none rounded-xl border border-ink/10 bg-paper-muted px-3.5 py-2.5 text-sm outline-none transition focus:border-brand focus:bg-paper"
                 />
               </div>
             </div>
             <button
               type="submit"
               disabled={submitting}
-              className="btn-brand mt-6 w-full disabled:opacity-60"
+              className="btn-brand mt-4 w-full disabled:opacity-60"
             >
               {submitting ? "Sending..." : <>Send Inquiry <ArrowRight className="h-4 w-4" /></>}
             </button>
@@ -134,7 +134,7 @@ const Field = ({
       type={type}
       required={required}
       placeholder={placeholder}
-      className="mt-2 w-full rounded-xl border border-ink/10 bg-paper-muted px-4 py-3 text-sm outline-none transition placeholder:text-ink/30 focus:border-brand focus:bg-paper"
+      className="mt-1.5 w-full rounded-xl border border-ink/10 bg-paper-muted px-3.5 py-2.5 text-sm outline-none transition placeholder:text-ink/30 focus:border-brand focus:bg-paper"
     />
   </div>
 );

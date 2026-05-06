@@ -10,9 +10,9 @@ const reasons = [
 
 export const WhyChoose = () => {
   return (
-    <section className="bg-paper py-24 md:py-32">
+    <section className="bg-paper py-10 md:py-14">
       <div className="container-x">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_1.4fr] lg:gap-20">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_1.4fr] lg:gap-14">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <span className="chip mb-5">Why EWAG</span>
             <h2 className="font-display text-4xl font-bold leading-[1.05] text-balance md:text-5xl lg:text-6xl">
@@ -28,11 +28,11 @@ export const WhyChoose = () => {
             {reasons.map(({ icon: Icon, t, d }, i) => (
               <div
                 key={t}
-                className={`rounded-3xl border border-ink/10 bg-paper-muted p-7 transition-colors hover:border-brand ${
+                className={`rounded-3xl border border-ink/10 bg-paper-muted p-6 transition-colors hover:border-brand ${
                   i === 0 ? "sm:col-span-2" : ""
                 }`}
               >
-                <div className="grid h-11 w-11 place-items-center rounded-xl bg-brand text-paper">
+                <div className="grid h-11 w-11 place-items-center rounded-xl bg-paper border border-ink/10 text-ink transition-colors group-hover:bg-brand group-hover:text-paper group-hover:border-brand">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-5 font-display text-lg font-semibold">{t}</h3>

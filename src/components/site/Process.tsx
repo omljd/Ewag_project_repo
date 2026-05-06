@@ -8,28 +8,28 @@ const steps = [
 
 export const Process = () => {
   return (
-    <section id="process" className="bg-ink py-24 text-paper md:py-32">
+    <section id="process" className="bg-background py-14 text-foreground">
       <div className="container-x">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="chip-dark mb-5">Our process</span>
+          <span className="chip mb-5">Our process</span>
           <h2 className="font-display text-4xl font-bold leading-[1.05] text-balance md:text-6xl">
             Five steps to a <span className="text-brand">working growth engine</span>.
           </h2>
         </div>
 
-        <div className="mt-16 grid gap-px overflow-hidden rounded-3xl border border-paper/10 bg-paper/10 md:grid-cols-5">
+        <div className="mt-10 grid gap-px overflow-hidden rounded-3xl border border-foreground/5 bg-foreground/5 md:grid-cols-5">
           {steps.map((s, i) => (
             <div
               key={s.n}
-              className="group relative bg-ink p-7 transition-colors hover:bg-paper/5"
+              className="group relative bg-background p-7 transition-colors hover:bg-brand/5"
             >
               <div className="font-display text-5xl font-bold text-brand">{s.n}</div>
-              <h3 className="mt-6 font-display text-lg font-semibold text-paper">
+              <h3 className="mt-6 font-display text-lg font-semibold text-foreground">
                 {s.title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-paper/60">{s.desc}</p>
+              <p className="mt-2 text-sm leading-relaxed text-foreground/60">{s.desc}</p>
               {i < steps.length - 1 && (
-                <div className="absolute right-4 top-10 hidden text-paper/20 md:block">
+                <div className="absolute right-4 top-10 hidden text-foreground/10 md:block">
                   →
                 </div>
               )}

@@ -11,7 +11,7 @@ const industries = [
 
 export const Industries = () => {
   return (
-    <section id="industries" className="bg-paper-muted py-24 md:py-32">
+    <section id="industries" className="bg-paper-muted py-10 md:py-14">
       <div className="container-x">
         <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div className="max-w-xl md:max-w-full">
@@ -26,15 +26,15 @@ export const Industries = () => {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {industries.map(({ icon: Icon, name, problem, help }) => (
             <div
               key={name}
-              className="group relative overflow-hidden rounded-3xl border border-ink/10 bg-paper p-7 transition-all hover:border-brand hover:shadow-card"
+              className="group relative overflow-hidden rounded-3xl border border-ink/10 bg-paper p-6 transition-all hover:border-brand hover:shadow-card"
             >
               <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-brand/5 transition-transform duration-500 group-hover:scale-150" />
               <div className="relative">
-                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand text-paper transition-colors">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-paper border border-ink/10 text-ink transition-colors group-hover:bg-brand group-hover:text-paper group-hover:border-brand">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-6 font-display text-xl font-semibold">{name}</h3>
