@@ -27,11 +27,11 @@ export const Hero = () => {
       <div className="absolute inset-0 bg-gradient-radial-brand" />
       <div className="pointer-events-none absolute -bottom-32 left-1/2 h-[500px] w-[900px] -translate-x-1/2 rounded-full bg-brand/20 blur-[120px]" />
 
-      <div className="container-x relative pt-20 pb-12 md:pt-28 md:pb-16">
+      <div className="container-x relative pt-24 pb-16 md:pt-36 md:pb-24">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
           {/* Left Column: Content */}
           <div className="flex flex-col items-start text-left">
-            <span className="chip mb-6 animate-fade-up">
+            <span className="chip mb-10 animate-fade-up">
               <Sparkles className="h-3.5 w-3.5 text-brand" />
               Automation-first digital growth agency
             </span>
@@ -51,11 +51,17 @@ export const Hero = () => {
               </span>
             </h1>
 
-            <p className="mt-6 max-w-md text-base leading-relaxed text-foreground/80 md:text-lg animate-fade-up" style={{ animationDelay: "140ms" }}>
+            <p className="mt-10 max-w-md text-base leading-relaxed text-foreground/80 md:text-lg animate-fade-up" style={{ animationDelay: "140ms" }}>
               We build websites, AI content, and automation systems that help businesses attract customers and grow faster.
             </p>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-foreground/70 animate-fade-up" style={{ animationDelay: "180ms" }}>
+              Our automation-first approach eliminates bottlenecks, allowing your team to focus on high-impact strategy while our systems handle the heavy lifting.
+            </p>
+            <p className="mt-6 max-w-md text-base leading-relaxed text-foreground/70 animate-fade-up" style={{ animationDelay: "220ms" }}>
+              Whether you need a high-converting landing page or a custom AI agent, we deliver technical excellence that translates into measurable business growth.
+            </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "220ms" }}>
+            <div className="mt-12 flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "260ms" }}>
               <button onClick={openConsultationModal} className="btn-brand">
                 Book Free Consultation <ArrowRight className="h-4 w-4" />
               </button>
@@ -68,16 +74,46 @@ export const Hero = () => {
                 <MessageCircle className="h-4 w-4" /> WhatsApp
               </a>
             </div>
+
+            {/* Social Proof */}
+            <div className="mt-12 flex items-center gap-4 animate-fade-up" style={{ animationDelay: "320ms" }}>
+              <div className="flex -space-x-3">
+                {[
+                  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=100&h=100&auto=format&fit=crop&crop=faces",
+                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&h=100&auto=format&fit=crop&crop=faces",
+                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=100&h=100&auto=format&fit=crop&crop=faces",
+                  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&h=100&auto=format&fit=crop&crop=faces"
+                ].map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt="Client"
+                    className="h-10 w-10 rounded-full border-2 border-background object-cover shadow-sm"
+                  />
+                ))}
+                <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-background bg-brand/10 text-[10px] font-bold text-brand shadow-sm">
+                  120+
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-0.5">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <Sparkles key={i} className="h-3 w-3 text-brand" fill="currentColor" />
+                  ))}
+                </div>
+                <p className="text-xs font-medium text-foreground/60">Trusted by 500+ businesses worldwide</p>
+              </div>
+            </div>
           </div>
 
           {/* Right Column: Service Selection Card */}
           <div className="relative animate-fade-up" style={{ animationDelay: "400ms" }}>
-            <div className="rounded-2xl border border-foreground/10 bg-paper p-6 shadow-card md:p-8">
-              <h3 className="mb-6 font-display text-xl font-bold text-center">
+            <div className="rounded-2xl border border-foreground/10 bg-paper px-6 py-12 shadow-card md:px-8 md:py-20">
+              <h3 className="mb-10 font-display text-xl font-bold text-center md:text-2xl">
                 How can we help you <span className="text-brand">get found?</span>
               </h3>
               
-              <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
                 {services.map((s) => {
                   const isSelected = selectedServices.includes(s);
                   return (
@@ -105,11 +141,11 @@ export const Hero = () => {
                 })}
               </div>
 
-              <button onClick={openConsultationModal} className="btn-brand mt-6 w-full py-3 text-center text-base">
+              <button onClick={openConsultationModal} className="btn-brand mt-12 w-full py-4 text-center text-base">
                 Get started
               </button>
 
-              <p className="mt-4 text-center text-xs text-foreground/40">
+              <p className="mt-6 text-center text-xs text-foreground/40">
                 Pick your goals and let's build your plan.
               </p>
             </div>
@@ -142,7 +178,7 @@ export const Hero = () => {
         </div>
 
         {/* Metrics Bar */}
-        <div className="mt-10 animate-fade-up" style={{ animationDelay: "500ms" }}>
+        <div className="mt-20 animate-fade-up" style={{ animationDelay: "500ms" }}>
           <div className="rounded-2xl border border-foreground/5 bg-paper p-6 shadow-sm md:rounded-full md:px-12 md:py-8">
             <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-4 md:divide-x md:divide-foreground/5">
               <div className="text-center">

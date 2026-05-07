@@ -29,11 +29,11 @@ export const Work = () => {
           </a>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
           {work.map((w) => (
             <div
               key={w.title}
-              className="group relative overflow-hidden rounded-3xl border border-ink/10 bg-paper p-7 transition-all hover:-translate-y-1 hover:shadow-card"
+              className="group relative overflow-hidden rounded-3xl border border-ink/10 bg-paper p-8 transition-all hover:-translate-y-1 hover:shadow-card"
             >
               <div className="flex items-start justify-between">
                 <span className="chip">{w.cat}</span>
@@ -43,7 +43,7 @@ export const Work = () => {
                 {w.title}
               </h3>
               <p className="mt-2 font-display text-xl text-ink">{w.result}</p>
-              <p className="mt-6 text-xs uppercase tracking-widest text-ink/40">
+              <p className="mt-8 text-[10px] uppercase tracking-widest text-ink/40">
                 {w.tools}
               </p>
             </div>
