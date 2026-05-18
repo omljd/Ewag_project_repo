@@ -21,19 +21,42 @@ const BookConsultationPage = () => {
     document.title = "Book a Consultation — EWAG Digital Services";
   }, []);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-      toast({
-        title: "Booking Request Sent! ✦",
-        description: "We've received your details and will contact you shortly to confirm the slot.",
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      company: formData.get("website") || "N/A",
+      service: selectedService,
+      message: formData.get("message") || "",
+      businessType: "Dedicated Booking Page"
+    };
+
+    try {
+      const res = await fetch("http://localhost:5000/api/consultations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
-    }, 1500);
+
+      if (res.ok) {
+        (e.target as HTMLFormElement).reset();
+        toast({
+          title: "Booking Request Sent! ✦",
+          description: "We've received your details and will contact you shortly to confirm the slot.",
+        });
+      } else {
+        toast({ title: "Error", description: "Failed to send request", variant: "destructive" });
+      }
+    } catch (error) {
+      toast({ title: "Error", description: "Connection error", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

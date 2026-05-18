@@ -28,19 +28,42 @@ export const ConsultationModal = () => {
   // Register the trigger
   setModalTrigger(setOpen);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
     
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitting(false);
-      setOpen(false);
-      toast({
-        title: "Booking Request Sent! ✦",
-        description: "We've received your details and will contact you shortly to confirm the slot.",
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      service: selectedService,
+      message: formData.get("context") || "",
+      company: "N/A",
+      phone: "N/A",
+      businessType: "Modal Inquiry"
+    };
+
+    try {
+      const res = await fetch("http://localhost:5000/api/consultations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
-    }, 1500);
+
+      if (res.ok) {
+        setOpen(false);
+        toast({
+          title: "Booking Request Sent! ✦",
+          description: "We've received your details and will contact you shortly to confirm the slot.",
+        });
+      } else {
+        toast({ title: "Error", description: "Failed to send request", variant: "destructive" });
+      }
+    } catch (error) {
+      toast({ title: "Error", description: "Connection error", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -108,6 +131,7 @@ export const ConsultationModal = () => {
               <div>
                 <label className="mb-1.5 block text-[10px] font-bold uppercase tracking-widest text-ink/40">Context</label>
                 <textarea
+                  name="context"
                   placeholder="Tell us about your project..."
                   rows={3}
                   className="w-full resize-none rounded-xl border border-ink/10 bg-paper-muted px-4 py-2.5 text-sm outline-none focus:border-brand focus:bg-paper"

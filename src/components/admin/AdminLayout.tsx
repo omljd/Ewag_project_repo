@@ -1,5 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Navigate, Link, useLocation, useNavigate } from "react-router-dom";
+import { io } from "socket.io-client";
 import { useAuth } from "@/hooks/use-auth";
 import { 
   LayoutDashboard, 
@@ -31,6 +32,56 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
   const { user, logout, isLoading } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const [hasNewNotif, setHasNewNotif] = useState(false);
+  const [notifications, setNotifications] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Fetch initial leads for notifications dropdown
+    fetch('http://localhost:5000/api/consultations')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          const loadedNotifs = data.slice(0, 6).map((item: any) => ({
+            title: "New Inquiry",
+            desc: `${item.name} sent a message.`,
+            time: new Date(item.created_at || Date.now()).toLocaleDateString(),
+            icon: MessageSquare,
+            color: "text-brand",
+            bg: "bg-brand/10"
+          }));
+          setNotifications(loadedNotifs);
+        }
+      })
+      .catch(err => console.error("Failed to load notifications", err));
+  }, []);
+
+  useEffect(() => {
+    if (!user) return;
+    const socket = io('http://localhost:5000');
+    
+    socket.on('new_lead', (lead) => {
+      setHasNewNotif(true);
+      const newNotif = {
+        title: "New Inquiry",
+        desc: `${lead.name} sent a message.`,
+        time: "Just now",
+        icon: MessageSquare,
+        color: "text-brand",
+        bg: "bg-brand/10"
+      };
+      setNotifications(prev => [newNotif, ...prev]);
+
+      toast('🔔 New Inquiry Received!', {
+        description: `${lead.name} is interested in ${lead.service || 'your services'}.`,
+        action: {
+          label: 'View',
+          onClick: () => navigate('/admin/consultations')
+        }
+      });
+    });
+
+    return () => { socket.disconnect(); };
+  }, [user, navigate]);
 
   if (isLoading) return <div className="min-h-screen flex items-center justify-center bg-paper">Loading...</div>;
   if (!user) return <Navigate to="/admin/login" replace />;
@@ -107,24 +158,26 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
           <div className="flex items-center gap-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="h-10 w-10 rounded-xl bg-ink/5 flex items-center justify-center hover:bg-ink/10 transition-colors relative">
+                <button 
+                  onClick={() => setHasNewNotif(false)}
+                  className="h-10 w-10 rounded-xl bg-ink/5 flex items-center justify-center hover:bg-ink/10 transition-colors relative"
+                >
                   <Bell className="h-4 w-4 text-ink/60" />
-                  <span className="absolute top-2.5 right-2.5 h-1.5 w-1.5 rounded-full bg-brand ring-2 ring-paper" />
+                  {hasNewNotif && <span className="absolute top-2.5 right-2.5 h-1.5 w-1.5 rounded-full bg-brand ring-2 ring-paper" />}
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-80 bg-paper border-ink/5 rounded-2xl shadow-xl p-0 overflow-hidden">
                 <div className="p-4 border-b border-ink/5 bg-ink/[0.02]">
                   <div className="flex justify-between items-center">
                     <h3 className="text-sm font-bold">Notifications</h3>
-                    <button className="text-[10px] font-bold text-brand hover:underline" onClick={() => toast.success("All caught up!")}>Mark all read</button>
+                    <button className="text-[10px] font-bold text-brand hover:underline" onClick={() => { setNotifications([]); toast.success("Notifications cleared"); }}>Mark all read</button>
                   </div>
                 </div>
                 <div className="max-h-96 overflow-y-auto">
-                  {[
-                    { title: "New Inquiry", desc: "Rahul Sharma sent a message.", time: "2m ago", icon: MessageSquare, color: "text-brand", bg: "bg-brand/10" },
-                    { title: "Lead Converted", desc: "Ananya Kapoor moved to Completed.", time: "1h ago", icon: CheckCircle2, color: "text-emerald-600", bg: "bg-emerald-600/10" },
-                    { title: "System Update", desc: "EWAG Dashboard v2.1 is now live.", time: "4h ago", icon: Layers, color: "text-blue-600", bg: "bg-blue-600/10" },
-                  ].map((notif, i) => (
+                  {notifications.length === 0 ? (
+                    <div className="p-8 text-center text-xs text-ink/40 font-medium">No new notifications</div>
+                  ) : (
+                    notifications.map((notif, i) => (
                     <div key={i} className="p-4 hover:bg-ink/[0.02] border-b border-ink/5 last:border-0 cursor-pointer group transition-colors">
                       <div className="flex gap-3">
                         <div className={`h-8 w-8 rounded-lg ${notif.bg} flex items-center justify-center ${notif.color}`}>
@@ -137,7 +190,7 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
                         </div>
                       </div>
                     </div>
-                  ))}
+                  )))}
                 </div>
                 <div className="p-3 bg-ink/[0.01] text-center border-t border-ink/5">
                   <button className="text-[10px] font-bold text-ink/40 hover:text-ink transition-colors" onClick={() => navigate("/admin/consultations")}>View all activity</button>

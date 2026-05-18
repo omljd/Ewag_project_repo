@@ -1,4 +1,5 @@
 import { AdminLayout } from "@/components/admin/AdminLayout";
+import { io } from "socket.io-client";
 import { 
   Search, 
   Filter, 
@@ -16,7 +17,7 @@ import {
   Trash2,
   UserPlus
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import {
   DropdownMenu,
@@ -39,17 +40,60 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const ConsultationsPage = () => {
-  const [inquiries, setInquiries] = useState([
-    { id: "1", name: "Rahul Sharma", email: "rahul@astratech.com", phone: "+91 98765 43210", company: "Astra Tech", service: "Marketing Automation", status: "New", date: "May 11, 2026", time: "10:30 AM" },
-    { id: "2", name: "Priya Patel", email: "priya@glowandco.in", phone: "+91 87654 32109", company: "Glow & Co", service: "Website Design", status: "Contacted", date: "May 10, 2026", time: "02:15 PM" },
-    { id: "3", name: "Kevin Varghese", email: "kevin@buildit.com", phone: "+91 76543 21098", company: "BuildIt Ltd", service: "Lead Generation", status: "In Progress", date: "May 10, 2026", time: "11:00 AM" },
-    { id: "4", name: "Ananya Kapoor", email: "ananya@designstudio.io", phone: "+91 65432 10987", company: "Design Studio", service: "AI Content", status: "Completed", date: "May 09, 2026", time: "04:45 PM" },
-    { id: "5", name: "Siddharth Malhotra", email: "sid@techpulse.com", phone: "+91 54321 09876", company: "Tech Pulse", service: "WhatsApp Automation", status: "New", date: "May 09, 2026", time: "09:00 AM" },
-  ]);
-
+  const [inquiries, setInquiries] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [newLead, setNewLead] = useState({ name: "", email: "", company: "", service: "" });
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch data from real backend
+  const fetchConsultations = async () => {
+    try {
+      setIsLoading(true);
+      const res = await fetch("http://localhost:5000/api/consultations");
+      if (res.ok) {
+        const data = await res.json();
+        // Format date and time for frontend
+        const formattedData = data.map((item: any) => {
+          const dt = new Date(item.created_at);
+          return {
+            ...item,
+            id: item.id.toString(),
+            date: dt.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+            time: dt.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+          };
+        });
+        setInquiries(formattedData);
+      } else {
+        toast.error("Failed to load customer data");
+      }
+    } catch (error) {
+      toast.error("Error connecting to server");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchConsultations();
+
+    const socket = io('http://localhost:5000');
+    socket.on('new_lead', (lead) => {
+      // Format it properly before adding
+      const dt = new Date(lead.time);
+      const formattedLead = {
+        ...lead,
+        id: lead.id.toString(),
+        date: dt.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+        time: dt.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+      };
+      // Prepend to inquiries
+      setInquiries(prev => [formattedLead, ...prev]);
+    });
+
+    return () => { socket.disconnect(); };
+  }, []);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -61,26 +105,57 @@ const ConsultationsPage = () => {
     }
   };
 
-  const handleDelete = (id: string) => {
-    setInquiries(inquiries.filter(i => i.id !== id));
-    toast.success("Customer record deleted successfully");
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/consultations/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setInquiries(inquiries.filter(i => i.id !== id));
+        toast.success("Customer record deleted successfully");
+      } else {
+        toast.error("Failed to delete record");
+      }
+    } catch (error) {
+      toast.error("Error connecting to server");
+    }
   };
 
-  const handleUpdateStatus = (id: string, status: string) => {
-    setInquiries(inquiries.map(i => i.id === id ? { ...i, status } : i));
-    toast.success(`Status updated to ${status}`);
+  const handleUpdateStatus = async (id: string, status: string) => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/consultations/${id}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      if (res.ok) {
+        setInquiries(inquiries.map(i => i.id === id ? { ...i, status } : i));
+        toast.success(`Status updated to ${status}`);
+      } else {
+        toast.error("Failed to update status");
+      }
+    } catch (error) {
+      toast.error("Error connecting to server");
+    }
   };
 
-  const handleAddLead = (e: React.FormEvent) => {
+  const handleAddLead = async (e: React.FormEvent) => {
     e.preventDefault();
-    const id = (inquiries.length + 1).toString();
-    const date = new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
-    const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    
-    setInquiries([{ id, ...newLead, phone: "N/A", status: "New", date, time }, ...inquiries]);
-    setIsAddModalOpen(false);
-    setNewLead({ name: "", email: "", company: "", service: "" });
-    toast.success("New lead added successfully");
+    try {
+      const res = await fetch("http://localhost:5000/api/consultations", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newLead)
+      });
+      if (res.ok) {
+        toast.success("New lead added successfully");
+        setIsAddModalOpen(false);
+        setNewLead({ name: "", email: "", company: "", service: "" });
+        fetchConsultations(); // Refresh the list
+      } else {
+        toast.error("Failed to add lead");
+      }
+    } catch (error) {
+      toast.error("Error connecting to server");
+    }
   };
 
   const filteredInquiries = inquiries.filter(i => 

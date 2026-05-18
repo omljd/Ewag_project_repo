@@ -12,17 +12,50 @@ export const Contact = ({ hideBackground = false }: { hideBackground?: boolean }
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      (e.target as HTMLFormElement).reset();
-      toast({
-        title: "Inquiry received ✦",
-        description: "We'll reach out within a few business hours.",
+    
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name"),
+      company: formData.get("business"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      service: formData.get("service"),
+      businessType: formData.get("businessType"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("http://localhost:5000/api/consultations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       });
-    }, 800);
+
+      if (res.ok) {
+        (e.target as HTMLFormElement).reset();
+        toast({
+          title: "Inquiry received ✦",
+          description: "We'll reach out within a few business hours.",
+        });
+      } else {
+        toast({
+          title: "Something went wrong",
+          description: "Please try again or contact us via WhatsApp.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Connection error",
+        description: "Failed to connect to the server. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

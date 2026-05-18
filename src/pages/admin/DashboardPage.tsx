@@ -14,7 +14,7 @@ import {
   Briefcase
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import {
   DropdownMenu,
@@ -35,18 +35,50 @@ const DashboardPage = () => {
   const [selectedCustomer, setSelectedCustomer] = useState<any>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
-  const stats = [
-    { label: "Total Customers", value: "84", trend: "+12.5%", icon: MessageSquare, color: "text-brand", bg: "bg-brand/10", path: "/admin/consultations" },
-    { label: "Recent Leads", value: "12", trend: "+4.2%", icon: Users, color: "text-blue-600", bg: "bg-blue-600/10", path: "/admin/consultations" },
-    { label: "Converted", value: "42", trend: "Live", icon: Layers, color: "text-emerald-600", bg: "bg-emerald-600/10", path: "/admin/consultations" },
-    { label: "Avg Response", value: "1.4h", trend: "-15min", icon: Clock, color: "text-orange-600", bg: "bg-orange-600/10", path: "/admin/consultations" },
-  ];
+  const [recentCustomers, setRecentCustomers] = useState<any[]>([]);
+  const [statsData, setStatsData] = useState({
+    total: 0,
+    newLeads: 0,
+    converted: 0
+  });
 
-  const recentCustomers = [
-    { name: "Rahul Sharma", company: "Astra Tech", service: "Marketing Automation", status: "New", time: "2m ago", email: "rahul@astratech.com", phone: "+91 98765 43210" },
-    { name: "Priya Patel", company: "Glow & Co", service: "Website Design", status: "Contacted", time: "1h ago", email: "priya@glowandco.in", phone: "+91 87654 32109" },
-    { name: "Kevin V.", company: "BuildIt Ltd", service: "Lead Generation", status: "In Progress", time: "4h ago", email: "kevin@buildit.com", phone: "+91 76543 21098" },
-    { name: "Ananya K.", company: "Design Studio", service: "AI Content", status: "Completed", time: "1d ago", email: "ananya@designstudio.io", phone: "+91 65432 10987" },
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/consultations");
+        if (res.ok) {
+          const data = await res.json();
+          
+          // Calculate Stats
+          setStatsData({
+            total: data.length,
+            newLeads: data.filter((d: any) => d.status === 'New').length,
+            converted: data.filter((d: any) => d.status === 'Completed').length
+          });
+
+          // Get top 4 recent customers
+          const recent = data.slice(0, 4).map((item: any) => {
+            const dt = new Date(item.created_at);
+            return {
+              ...item,
+              time: dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+            };
+          });
+          setRecentCustomers(recent);
+        }
+      } catch (error) {
+        console.error("Failed to load dashboard data", error);
+      }
+    };
+    
+    fetchDashboardData();
+  }, []);
+
+  const stats = [
+    { label: "Total Customers", value: statsData.total.toString(), trend: "All Time", icon: MessageSquare, color: "text-brand", bg: "bg-brand/10", path: "/admin/consultations" },
+    { label: "Recent Leads", value: statsData.newLeads.toString(), trend: "New", icon: Users, color: "text-blue-600", bg: "bg-blue-600/10", path: "/admin/consultations" },
+    { label: "Converted", value: statsData.converted.toString(), trend: "Completed", icon: Layers, color: "text-emerald-600", bg: "bg-emerald-600/10", path: "/admin/consultations" },
+    { label: "Avg Response", value: "1.4h", trend: "-15min", icon: Clock, color: "text-orange-600", bg: "bg-orange-600/10", path: "/admin/consultations" },
   ];
 
   const handleViewProfile = (customer: any) => {
@@ -105,7 +137,7 @@ const DashboardPage = () => {
                 <div key={i} className="flex items-center justify-between group">
                   <div className="flex items-center gap-4">
                     <div className="h-10 w-10 rounded-xl bg-ink/5 flex items-center justify-center font-bold text-ink/40">
-                      {inquiry.name.charAt(0)}
+                      {inquiry.name?.charAt(0) || 'U'}
                     </div>
                     <div>
                       <div className="text-sm font-bold text-ink group-hover:text-brand transition-colors">{inquiry.name}</div>
@@ -150,7 +182,7 @@ const DashboardPage = () => {
             <>
               <div className="h-32 bg-gradient-to-r from-brand to-indigo-600 relative">
                 <div className="absolute -bottom-10 left-8 h-20 w-20 rounded-2xl bg-paper shadow-xl flex items-center justify-center text-3xl font-display font-bold text-brand border-4 border-paper">
-                  {selectedCustomer.name.charAt(0)}
+                  {selectedCustomer.name?.charAt(0) || 'U'}
                 </div>
               </div>
               <div className="pt-14 px-8 pb-8 space-y-6">

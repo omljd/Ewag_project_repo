@@ -29,35 +29,43 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const login = async (email: string, pass: string) => {
-    // Mock login
-    return new Promise<void>((resolve, reject) => {
-      setTimeout(() => {
-        if (email && pass) {
-          const mockUser = { email, name: email.split('@')[0] };
-          setUser(mockUser);
-          localStorage.setItem('ewag_admin_user', JSON.stringify(mockUser));
-          resolve();
-        } else {
-          reject(new Error('Invalid credentials'));
-        }
-      }, 1000);
-    });
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setUser(data.user);
+        localStorage.setItem('ewag_admin_user', JSON.stringify(data.user));
+        localStorage.setItem('ewag_admin_token', data.token);
+      } else {
+        throw new Error(data.error || 'Login failed');
+      }
+    } catch (error: any) {
+      throw new Error(error.message || 'Login failed');
+    }
   };
 
   const signup = async (email: string, pass: string, name: string) => {
-    // Mock signup
-    return new Promise<void>((resolve, reject) => {
-      setTimeout(() => {
-        if (email && pass && name) {
-          const mockUser = { email, name };
-          setUser(mockUser);
-          localStorage.setItem('ewag_admin_user', JSON.stringify(mockUser));
-          resolve();
-        } else {
-          reject(new Error('All fields are required'));
-        }
-      }, 1000);
-    });
+    try {
+      const res = await fetch('http://localhost:5000/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password: pass, name })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setUser(data.user);
+        localStorage.setItem('ewag_admin_user', JSON.stringify(data.user));
+        localStorage.setItem('ewag_admin_token', data.token);
+      } else {
+        throw new Error(data.error || 'Signup failed');
+      }
+    } catch (error: any) {
+      throw new Error(error.message || 'Signup failed');
+    }
   };
 
   const logout = () => {
